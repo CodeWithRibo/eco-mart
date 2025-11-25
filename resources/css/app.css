@@ -2,7 +2,7 @@
 
 @plugin '@tailwindcss/forms';
 @plugin "daisyui" {
-    themes: light --default;
+    themes: light --default, dark --prefersdark;
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -31,8 +31,8 @@
     border-color: var(--color-gray-200, currentcolor);
   }
     .card-group {
-        @apply bg-white shadow-md w-full flex flex-col space-y-5
-        rounded-2xl hover:shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer;
+        @apply bg-white shadow-md w-full flex flex-col rounded-2xl hover:shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer;
     }
 }
+@custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */
 

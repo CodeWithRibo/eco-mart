@@ -34,6 +34,8 @@
         <x-ui.toast maxToasts="5" />
     </main>
 </div>
+
 @livewireScripts
+@stack('scripts')
 </body>
 </html>

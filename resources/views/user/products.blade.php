@@ -5,7 +5,6 @@
             <div class="">
                 <div class="p-6 text-gray-900 space-y-3 text-center">
                    <h1 class="text-4xl font-semibold">All Products</h1>
-                    <p class="text-base text-gray-500">Showing 12 products</p>
                 </div>
                 @livewire('user.product-list')
             </div>

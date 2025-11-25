@@ -9,11 +9,10 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Processing');
             $table->string('total_amount');
             $table->string('payment_method');
             $table->string('order_number');
-            $table->string('discount');
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained()

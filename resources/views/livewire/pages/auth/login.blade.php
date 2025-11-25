@@ -12,7 +12,7 @@ class extends Component {
     /**
      * Handle an incoming authentication request.
      */
-    public function login(): void
+    public function login()
     {
         $this->validate();
 
@@ -20,7 +20,11 @@ class extends Component {
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        return redirect()->route( match (auth()->user()->role) {
+            'customer' => 'dashboard',
+            'admin' => 'admin.dashboard',
+            'rider' => 'rider.dashboard',
+        });
     }
 }; ?>
 
@@ -73,16 +77,6 @@ class extends Component {
                                   required autocomplete="current-password"/>
 
                     <x-input-error :messages="$errors->get('form.password')" class="mt-2"/>
-                </div>
-
-                <div class="mt-4 flex items-center justify-end">
-
-                    @if (Route::has('password.request'))
-                        <a class="text-sm text-[#2E7D32] hover:text-[#66BB6A]  rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                           href="{{ route('password.request') }}" wire:navigate>
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
                 </div>
 
                 <div class=" mt-4">

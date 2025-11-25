@@ -17,15 +17,19 @@ class ProductCreate extends Component
     public $category;
     public $price;
     public $stock;
+    public $unit;
+    public $label;
 
     protected function rules(): array
     {
         return [
             'product_name' => 'required',
-            'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000',
             'category' => 'required',
             'price' => 'required',
             'stock' => 'required',
+            'unit' => 'required',
+            'label' => 'required'
         ];
     }
 

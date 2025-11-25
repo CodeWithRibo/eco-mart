@@ -7,11 +7,11 @@ new class extends Component {
     /**
      * Log the current user out of the application.
      */
-    public function logout(Logout $logout): void
+    public function logout(Logout $logout)
     {
         $logout();
 
-        $this->redirect('/', navigate: true);
+       return redirect()->route('login');
     }
 }; ?>
 
@@ -34,17 +34,21 @@ new class extends Component {
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.inventories')" :active="request()->routeIs('inventory')" wire:navigate>
+                    <x-nav-link :href="route('admin.inventories')" :active="request()->routeIs('admin.inventories')">
                         {{ __('Inventory') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('shopping-carts')" :active="request()->routeIs('shopping-carts')" wire:navigate>
-                        {{ __('Shopping Carts') }}
+                    <x-nav-link :href="route('admin.orders')" :active="request()->routeIs('admin.orders')">
+                        {{ __('Orders') }}
                     </x-nav-link>
+
+                        <x-nav-link :href="route('admin.customer')" :active="request()->routeIs('admin.customer')">
+                            {{ __('Customers') }}
+                        </x-nav-link>
                 </div>
             </div>
 

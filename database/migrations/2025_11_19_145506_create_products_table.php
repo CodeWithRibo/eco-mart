@@ -13,6 +13,8 @@ return new class extends Migration {
             $table->string('category');
             $table->decimal('price');
             $table->string('stock');
+            $table->string('label');
+            $table->string('unit');
             $table->string('product_image')->nullable();
             $table->timestamps();
             $table->softDeletes();

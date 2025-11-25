@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\CartServiceInterface;
+use App\Services\CartService;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(CartServiceInterface::class, CartService::class);
     }
 
     /**
@@ -19,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::componentNamespace('App\\View\\Components\\Ui', 'ui');
     }
 }

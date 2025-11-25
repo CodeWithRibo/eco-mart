@@ -81,10 +81,10 @@
                             <img src="{{asset('storage/' . $product->product_image)}}"
                                  class="w-full h-full object-cover" alt="">
                         </div>
-                        <p>{{$product->product_name}}</p>
+                        <p class="pl-5 font-semibold">{{$product->product_name}}</p>
                     </td>
                     <td class="px-6 py-4">{{$product->category}}</td>
-                    <td class=" px-6 py-4">${{$product->price}}</td>
+                    <td class=" px-6 py-4">₱{{$product->price}}</td>
                     <td class=" px-6 py-4">{{$product->stock}} stocks</td>
                     <td class=" px-6 py-4">
                         @if($product->stock <= 0)
@@ -102,8 +102,6 @@
                         <x-ui.modal.trigger id="delete-product">
                             <x-ui.icon name="ps:trash" class="size-4" wire:click="delete({{$product->id}})"/>
                         </x-ui.modal.trigger>
-
-                        <x-ui.icon name="ps:dots-three-vertical" class="size-4"/>
                     </td>
                 </tr>
             @endforeach

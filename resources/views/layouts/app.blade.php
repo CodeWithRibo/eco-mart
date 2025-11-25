@@ -13,9 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <x-ui.toast maxToasts="5" />
+    <div class="min-h-screen bg-gray-100 text-gray-900">
             <livewire:layout.navigation />
 
             <!-- Page Heading -->
@@ -29,8 +31,13 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+               @yield('content')
             </main>
         </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @livewireScripts
+    <script src="{{ asset('ph-address-selector.js') }}"></script>
+
+    @stack('scripts')
     </body>
 </html>

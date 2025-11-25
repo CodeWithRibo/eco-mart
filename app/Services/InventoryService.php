@@ -35,10 +35,7 @@ class InventoryService
 
         return $query->paginate(10);
 
-//        return Product::query()
-//            ->search(trim($search))
-//            ->select(['id', 'product_name', 'product_image','category', 'price', 'stock'])
-//            ->paginate(10);
+
     }
 
     public static function editProduct($id)

@@ -14,7 +14,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased font-sans">
+{{--NEED TO POLISH UI--}}
 <div class="bg-white text-black">
+    @php
+        $products = \App\Models\Product::count('product_name');
+        $fruits_vegetables = \App\Models\Product::where('category' , 'Fruits')->orWhere('category', 'Vegetables')->count();
+        $dairy_eggs = \App\Models\Product::where('category' , 'dairy_eggs')->count();
+        $beverage = \App\Models\Product::where('category' , 'Beverage')->count();
+        $bakery = \App\Models\Product::where('category' , 'Bakery')->count();
+    @endphp
     <header class="bg-white py-5 shadow-md">
         <nav class="flex items-center justify-between mx-auto max-w-7xl px-6">
             <div class="flex items-center gap-3">
@@ -25,7 +33,21 @@
             </div>
             <div class="space-x-2 flex items-center  ">
                 <x-ui.icon name="ps:user" class="size-5 fill-gray-500"/>
-                <a href="{{route('login')}}" class="text-base text-gray-500 focus:text-green-700 hover:opacity-80">Login</a>
+                @auth
+                    <form action="{{route('logout-account')}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">
+                            <a
+                               class="text-base text-gray-500 focus:text-green-700 hover:opacity-80">Logout</a>
+                        </button>
+                    </form>
+                @endauth
+                @guest
+                    <a href="{{route('login')}}"
+                       class="text-base text-gray-500 focus:text-green-700 hover:opacity-80">Login</a>
+                @endguest
+
             </div>
         </nav>
     </header>
@@ -42,10 +64,12 @@
                     delivery. Fresh,
                     sustainable, and always delicious.</h2>
                 <div class="space-x-5">
-                    <x-ui.button
-                        class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-lg py-5 cursor-pointer">
-                        Shop Now
-                    </x-ui.button>
+                    <a href="{{ route('login') }}">
+                        <x-ui.button
+                            class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-lg py-5 cursor-pointer">
+                            Shop Now
+                        </x-ui.button>
+                    </a>
                     <x-ui.button
                         class="bg-white hover:opacity-80 transition-all duration-200 text-green-700 rounded-lg py-5 cursor-auto">
                         Learn More
@@ -86,7 +110,7 @@
                            <x-ui.icon name="ps:leaf" variant="bold" class="size-6 "/>
                        </span>
                     <span>
-                            <h1 class="text-lg">500+ Products</h1>
+                            <h1 class="text-lg">{{$products ?? 0}}+ Products</h1>
                             <h2 class="text-sm text-gray-500">Organic and Fresh</h2>
                         </span>
                 </div>
@@ -94,7 +118,7 @@
         </div>
     </section>
     {{--Shop By Category--}}
-    <section class="py-10 pb-16 bg-gray-100">
+    <section id="category" class="py-10 pb-16 bg-gray-100">
         <div class="mx-auto max-w-7xl">
             <span class="flex flex-col text-center justify-center space-y-2 py-14">
                 <h1 class="font-bold text-4xl">Shop by Category</h1>
@@ -102,7 +126,7 @@
             </span>
 
             <div
-                class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-10 xl:px-0 gap-5 cursor-pointer">
+                class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-10 xl:px-0 gap-5  text-center justify-center cursor-pointer">
                 <a class="inline-flex flex-col justify-center items-center text-center sm:text-start sm:items-start sm:justify-start bg-white py-6 px-8 rounded-xl hover:shadow-xl transition-all duration-300">
                     <span
                         class="rounded-xl p-[10px] bg-[#66bb6a] mb-1 w-16 h-16 hover:w-[70px] hover:h-[70px] transition-all duration-300 flex items-center justify-center">
@@ -110,7 +134,7 @@
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Fruits & Vegetables</h2>
-                        <p class="text-gray-500">234 items</p>
+                        <p class="text-gray-500">{{$fruits_vegetables ?? 0}} items</p>
                     </span>
                 </a>
 
@@ -121,7 +145,7 @@
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Dairy & Eggs</h2>
-                        <p class="text-gray-500">156 items</p>
+                        <p class="text-gray-500">{{$dairy_eggs ?? 0}} items</p>
                     </span>
                 </a>
 
@@ -132,18 +156,7 @@
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Bakery</h2>
-                        <p class="text-gray-500">50 items</p>
-                    </span>
-                </a>
-
-                <a class="inline-flex flex-col justify-center items-center text-center sm:text-start sm:items-start sm:justify-start bg-white py-6 px-8 rounded-xl hover:shadow-xl transition-all duration-300">
-                    <span
-                        class="rounded-xl p-[10px] bg-[#2e7d32] mb-1 w-16 h-16 hover:w-[70px] hover:h-[70px] transition-all duration-300 flex items-center justify-center">
-                           <x-ui.icon name="ps:fish" variant="bold" class="size-8 "/>
-                    </span>
-                    <span>
-                        <h2 class="text-xl mb-2 font-semibold text-gray-800">Meat & Seafood</h2>
-                        <p class="text-gray-500">234 items</p>
+                        <p class="text-gray-500">{{$bakery ?? 0}} items</p>
                     </span>
                 </a>
 
@@ -154,142 +167,132 @@
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Beverage</h2>
-                        <p class="text-gray-500">234 items</p>
+                        <p class="text-gray-500">{{$beverage ?? 0}} items</p>
                     </span>
                 </a>
 
-                <a class="inline-flex flex-col justify-center items-center text-center sm:text-start sm:items-start sm:justify-start bg-white py-6 px-8 rounded-xl hover:shadow-xl transition-all duration-300">
-                    <span
-                        class="rounded-xl p-[10px] bg-[#f9c74f] mb-1 w-16 h-16 hover:w-[70px] hover:h-[70px] transition-all duration-300 flex items-center justify-center">
-                           <x-ui.icon name="ps:cherries" variant="bold" class="size-8 "/>
-                    </span>
-                    <span>
-                        <h2 class="text-xl mb-2 font-semibold text-gray-800">Snacks</h2>
-                        <p class="text-gray-500">234 items</p>
-                    </span>
-                </a>
 
             </div>
         </div>
 
     </section>
-    {{--Featured Products--}}
-    <section class="py-10 pb-16 bg-white">
-        <div class="mx-auto max-w-7xl">
-             <span class="flex flex-col sm:flex-row sm:justify-between space-y-5 sm:space-y-2 py-14 px-10 xl:px-0">
-                 <span>
-                     <h1 class="font-bold text-4xl">Featured Products</h1>
-                     <p class="text-gray-500 text-sm">Our best-selling organic groceries</p>
-                 </span>
-                 <div>
-                     <a
-                         href="#"
-                         class="rounded-full px-6 py-3 bg-[#F5E6C8] text-[#2E7D32] hover:bg-[#F9C74F] transition-colors">View All</a>
-                 </div>
+    {{-- Testimonials --}}
+    <section class="py-16 bg-gray-50">
+        <div class="mx-auto max-w-7xl px-10 xl:px-0">
+
+            <div class="flex flex-col sm:flex-row sm:justify-between space-y-5 sm:space-y-0 items-center mb-14">
+            <span>
+                <h1 class="font-bold text-4xl">What Our Customers Say</h1>
+                <p class="text-gray-500 text-sm">Real feedback from people who love EcoMart</p>
             </span>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-10 xl:px-0 gap-5">
-                <div class="card-group">
-                    <img src="{{asset('tomatoes.jpg')}}"
-                         alt="tomatoes"
-                         class="w-full aspect-[4/3] object-cover object-center rounded-t-2xl">
-                    <div class="pb-5 px-5 space-y-3">
-                <span>
-                    <h1 class="text-xl text-gray-900 font-semibold">Organic Fresh Tomatoes</h1>
-                    <p class="text-green-700">$4.99 <span class="text-gray-500">/kg</span></p>
-                </span>
-                        <x-ui.button
-                            icon="ps:shopping-cart"
-                            class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-full cursor-pointer">
-                            Add
+
+            @auth
+                    <x-ui.modal.trigger id="testimonial-modal">
+                        <x-ui.button class="rounded-full px-6 py-3 bg-green-700 text-white hover:opacity-80">
+                            Share Your Feedback
                         </x-ui.button>
+                    </x-ui.modal.trigger>
+                @endauth
+                <x-ui.modal
+                    id="testimonial-modal"
+                    heading="Share Your Experience"
+                    description="We appreciate your honest feedback!"
+                >
+
+                    {{-- Hidden fields for authenticated user --}}
+{{--                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}
+{{--                    <input type="hidden" name="name" value="{{ auth()->user()->name }}">--}}
+{{--                    <input type="hidden" name="email" value="{{ auth()->user()->email }}">--}}
+
+                    <form method="POST" action="" class="space-y-6">
+                        @csrf
+
+                        {{-- Rating --}}
+                        <x-ui.field required>
+                            <x-ui.label>Rating</x-ui.label>
+                            <select name="rating" class="w-full border rounded-lg p-3">
+                                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                                <option value="4">⭐⭐⭐⭐ - Very Good</option>
+                                <option value="3">⭐⭐⭐ - Good</option>
+                                <option value="2">⭐⭐ - Fair</option>
+                                <option value="1">⭐ - Poor</option>
+                            </select>
+                        </x-ui.field>
+
+                        {{-- Message --}}
+                        <x-ui.field required>
+                            <x-ui.label>Your Feedback</x-ui.label>
+                            <x-ui.textarea
+                                name="message"
+                                placeholder="Tell us about your experience..."
+                                class="h-32"
+                            />
+                        </x-ui.field>
+
+                        {{-- Submit Button --}}
+                        <div class="flex justify-end">
+                            <x-ui.button
+                                type="submit"
+                                class="bg-green-700 text-white rounded-lg px-6 py-3 hover:opacity-80">
+                                Submit Feedback
+                            </x-ui.button>
+                        </div>
+                    </form>
+
+                </x-ui.modal>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                {{-- Testimonial Card 1 --}}
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="{{ asset('profile_1.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
+                        <div>
+                            <h3 class="font-semibold text-lg">Maria Santos</h3>
+                            <p class="text-gray-500 text-sm">Verified Customer</p>
+                        </div>
                     </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        “The fruits are incredibly fresh! I always order my weekly groceries here. Highly recommended!”
+                    </p>
                 </div>
-                <div class="card-group">
-                    <img src="{{asset('green_apple.jpg')}}"
-                         alt="green-apple"
-                         class="w-full aspect-[4/3] object-cover object-center rounded-t-2xl ">
-                    <div class="pb-5 px-5 space-y-3">
-                <span>
-                    <h1 class="text-xl text-gray-900 font-semibold">Green Apples Premium</h1>
-                    <p class="text-green-700">$4.99 <span class="text-gray-500">/kg</span></p>
-                </span>
-                        <x-ui.button
-                            icon="ps:shopping-cart"
-                            class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-full cursor-pointer">
-                            Add
-                        </x-ui.button>
+
+                {{-- Testimonial Card 2 --}}
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="{{ asset('profile_2.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
+                        <div>
+                            <h3 class="font-semibold text-lg">John Reyes</h3>
+                            <p class="text-gray-500 text-sm">Loyal Shopper</p>
+                        </div>
                     </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        “Fast delivery and excellent quality. Everything tastes better knowing it's organic.”
+                    </p>
                 </div>
-                <div class="card-group">
-                    <img src="{{asset('bread.jpg')}}"
-                         alt="bread"
-                         class="w-full aspect-[4/3] object-cover object-center rounded-t-2xl">
-                    <div class="pb-5 px-5 space-y-3">
-                <span>
-                    <h1 class="text-xl text-gray-900 font-semibold">Fresh Artisan Bread</h1>
-                    <p class="text-green-700">$4.99 <span class="text-gray-500">/loaf</span></p>
-                </span>
-                        <x-ui.button
-                            icon="ps:shopping-cart"
-                            class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-full cursor-pointer">
-                            Add
-                        </x-ui.button>
+
+                {{-- Testimonial Card 3 --}}
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="{{ asset('profile_3.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
+                        <div>
+                            <h3 class="font-semibold text-lg">Liza Mendoza</h3>
+                            <p class="text-gray-500 text-sm">Eco-Friendly Mom</p>
+                        </div>
                     </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        “EcoMart has changed how I shop. I love that I can support sustainable farming.”
+                    </p>
                 </div>
-                <div class="card-group">
-                    <img src="{{asset('milk.jpg')}}"
-                         alt="milk"
-                         class="w-full aspect-[4/3] object-cover object-center rounded-t-2xl">
-                    <div class="pb-5 px-5 space-y-3">
-                <span>
-                    <h1 class="text-xl text-gray-900 font-semibold">Organic Milk</h1>
-                    <p class="text-green-700">$4.99 <span class="text-gray-500">/liter</span></p>
-                </span>
-                        <x-ui.button
-                            icon="ps:shopping-cart"
-                            class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-full cursor-pointer">
-                            Add
-                        </x-ui.button>
-                    </div>
-                </div>
-                <div class="card-group">
-                    <img src="{{asset('fresh-vegetable.jpg')}}"
-                         alt="fresh-vegetable"
-                         class="w-full aspect-[4/3] object-cover object-center rounded-t-2xl">
-                    <div class="pb-5 px-5 space-y-3">
-                <span>
-                    <h1 class="text-xl text-gray-900 font-semibold">Fresh Vegetables Mix</h1>
-                    <p class="text-green-700">$5.99 <span class="text-gray-500">/kg</span></p>
-                </span>
-                        <x-ui.button
-                            icon="ps:shopping-cart"
-                            class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-full cursor-pointer">
-                            Add
-                        </x-ui.button>
-                    </div>
-                </div>
-                <div class="card-group">
-                    <img src="{{asset('fruit-basket.jpg')}}"
-                         alt="fruit-basket"
-                         class="w-full aspect-[4/3] object-cover object-center rounded-t-2xl">
-                    <div class="pb-5 px-5 space-y-3">
-                <span>
-                    <h1 class="text-xl text-gray-900 font-semibold">Organic Fruit Basket</h1>
-                    <p class="text-green-700">$11.99 <span class="text-gray-500">/kg</span></p>
-                </span>
-                        <x-ui.button
-                            icon="ps:shopping-cart"
-                            class="bg-green-700 hover:opacity-70 transition-all duration-200 text-white rounded-full cursor-pointer">
-                            Add
-                        </x-ui.button>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
+
     {{--Footer--}}
     <div class="bg-gray-100">
-        <footer class="footer sm:footer-horizontal  text-base-content py-10 mx-auto max-w-7xl">
+        <footer class="footer sm:footer-horizontal sm:px-0 px-10 py-10 mx-auto max-w-7xl text-black">
             <aside>
                 <div class="flex items-center gap-3">
                        <span class="rounded-full p-[10px] bg-[#2E7D32]">
@@ -299,14 +302,14 @@
                 </div>
                 <p>
                     Fresh, organic groceries delivered to your doorstep.
-                    <br />
+                    <br/>
                     <span class="text-gray-500">© {{\Carbon\Carbon::now()->year}} EcoMart. All rights reserved.</span>
                 </p>
             </aside>
             <nav>
                 <h6 class="footer-title">Shop</h6>
                 <a class="link link-hover">All Products</a>
-                <a class="link link-hover">Categories</a>
+                <a href="#category" class="link link-hover">Categories</a>
                 <a class="link link-hover">Deals</a>
             </nav>
             <nav>
@@ -316,7 +319,18 @@
             </nav>
             <nav>
                 <h6 class="footer-title">Quick Links</h6>
-                <a href="{{ route('login') }}" class="link link-hover">Login</a>
+                @auth
+                    <form action="{{route('logout-account')}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">
+                            <a class="link link-hover">Logout</a>
+                        </button>
+                    </form>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}" class="link link-hover">Login</a>
+                @endguest
                 <a href="{{ route('register') }}" class="link link-hover">Register</a>
                 <a class="link link-hover">About Us</a>
             </nav>

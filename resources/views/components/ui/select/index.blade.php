@@ -19,15 +19,15 @@
     $modelAttrs = collect($attributes->getAttributes())
         ->keys()
         ->first(fn($key) => str_starts_with($key, 'wire:model'));
-    
+
     $model = $modelAttrs ? $attributes->get($modelAttrs) : null;
 
     $isLive = $modelAttrs && str_contains($modelAttrs, '.live');
 @endphp
 
-<div 
+<div
     x-data="function(){
-        
+
         const $entangle = (prop, live, multiple) => {
             if (!prop) return multiple ? [] : null;
 
@@ -40,19 +40,19 @@
             search: '',
             open: false,
             isTyping: false,
-            
+
             // Manages visual highlighting of options (not real browser focus)
             // Real focus stays on input for accessibility, this just controls which option appears highlighted
             activeIndex: null,
-            
+
             // Store all available options and currently visible/filtered options
             options:[],        // All options from DOM
             filteredOptions:[], // Subset based on search query
-            
+
             isMultiple: @js($multiple),
             isDisabled: @js($disabled),
             isSearchable: @js($searchable),
-            
+
             // Selected value(s) - array for multiple, single value for single select
             state: $entangle(@js($model), @js($isLive), @js($multiple)),
 
@@ -80,10 +80,10 @@
                 // Filter options based on search input
                 this.$watch('search', (val) => {
                     if (val.trim() === '') {
-                        // Empty search → show all options 
+                        // Empty search → show all options
                         this.filteredOptions = this.options;
                     } else {
-                        // Filter by search query 
+                        // Filter by search query
                         this.filteredOptions = this.options.filter(option => this.contains(option.label,val));
                     }
                 })
@@ -108,10 +108,10 @@
                 // Multiple select: toggle option in/out of array
                 if(!Array.isArray(this.state)){
                     console.error('Multiple select requires an array value. Please bind an array property using x-model or wire:model.');
-                }        
-                
+                }
+
                 const itemIndex = this.state.findIndex(item => item === option);
-                
+
                 if (itemIndex === -1) {
                     this.state.push(option);    // Add to selection
                 } else {
@@ -142,9 +142,9 @@
             // Toggle dropdown open/closed state
             toggle() {
                 if (this.isDisabled) return;
-                
+
                 this.open = !this.open;
-                
+
                 // Auto-highlight first option when opening searchable select with no selection
                 if((this.open && !this.hasSelection) && this.isSearchable){
                     this.activeIndex = 0
@@ -177,7 +177,7 @@
                     let option = this.filteredOptions[this.activeIndex];
                     this.select(option.value);
                 }
-                
+
                 // Jump to first option
                 if (event.key === 'Home') {
                     this.activeIndex = 0;
@@ -190,17 +190,17 @@
                     return;
                 }
             },
-            
+
             // Convert option value to its index in the filtered results array
             getFilteredIndex(value) {
                 return this.filteredOptions.findIndex(option => option.value === value);
             },
-            
+
             // Mouse hover handler - sync visual highlight with mouse position is like converting hover state to our *virtual* focus
             handleMouseEnter(value) {
                 this.activeIndex = this.getFilteredIndex(value);
             },
-            
+
             handleMouseLeave(el){
                 // Only blur if searchable (input has focus)
                 if(this.isSearchable){
@@ -209,17 +209,17 @@
                 // Uncomment to clear highlight when mouse leaves (preference: keep activeIndex for better keyboard nav)
                 // this.activeIndex = null;
             },
-            
+
             // Check if option should appear visually highlighted
             isFocused(value) {
                 return this.activeIndex !== null && this.getFilteredIndex(value) === this.activeIndex;
             },
-            
+
             // Check if search returned any results
             get hasFilteredResults() {
                 return this.filteredOptions.length > 0;
             },
-            
+
             // Generate display text for the trigger button
             get label() {
                 if (!this.hasSelection) return this.placeholder;
@@ -238,19 +238,19 @@
 
                 return ` ${this.state.length} items selected`;
             },
-            
+
             // Check if any option is currently selected
             get hasSelection() {
                 return this.isMultiple ? this.state?.length > 0 : this.state !== null;
             },
-            
+
             contains(str, substring){
                 return str.toLowerCase().trim().includes(substring.toLowerCase().trim());
-            } 
+            }
         }
     }"
     {{ $attributes->class([
-            'relative [--popup-round:var(--radius-box)] [--popup-padding:--spacing(1)]',
+            'relative  [--popup-round:var(--radius-box)] [--popup-padding:--spacing(1)]',
             'dark:border-red-400! dark:shadow-red-400 text-red-400! placeholder:text-red-400!' => $invalid,
         ]),
      }}
@@ -258,9 +258,9 @@
 
      {{-- for classic form submission if your using livewire remove this sh**t --}}
     @if ($name)
-        <input 
-            type="hidden" 
-            name="{{ $name }}" 
+        <input
+            type="hidden"
+            name="{{ $name }}"
             x-bind:value="isMultiple ? state.join(',') : state"
         />
     @endif
@@ -268,7 +268,7 @@
     <div>
         <x-ui.select.trigger/>
 
-        <x-ui.select.options 
+        <x-ui.select.options
             :checkIconClass="$checkIconClass"
             :checkIcon="$checkIcon"
         >

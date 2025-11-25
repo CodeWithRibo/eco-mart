@@ -29,8 +29,36 @@
                     <x-ui.select.option value="Fruits">Fruits</x-ui.select.option>
                     <x-ui.select.option value="Bakery">Bakery</x-ui.select.option>
                     <x-ui.select.option value="Beverage">Beverage</x-ui.select.option>
+                    <x-ui.select.option value="Dairy & Eggs">Dairy & Eggs</x-ui.select.option>
+
                 </x-ui.select>
                 <x-ui.error name="category" />
+            </x-ui.field>
+
+            <x-ui.field required>
+                <x-ui.label>Unit</x-ui.label>
+                <x-ui.select
+                    wire:model.live.debounce.300ms="unit"
+                    placeholder="Choose option..."
+                    icon="exclamation-circle">
+                    <x-ui.select.option value="kg">Kilogram</x-ui.select.option>
+                    <x-ui.select.option value="cup">Cup</x-ui.select.option>
+                    <x-ui.select.option value="Pack">Pack</x-ui.select.option>
+                </x-ui.select>
+                <x-ui.error name="unit" />
+            </x-ui.field>
+
+            <x-ui.field required>
+                <x-ui.label>Label</x-ui.label>
+                <x-ui.select
+                    wire:model.live.debounce.300ms="label"
+                    placeholder="Choose option..."
+                    icon="exclamation-circle">
+                    <x-ui.select.option value="organic">Organic</x-ui.select.option>
+                    <x-ui.select.option value="natural">Natural</x-ui.select.option>
+                    <x-ui.select.option value="eco-friendly">Eco Friendly</x-ui.select.option>
+                </x-ui.select>
+                <x-ui.error name="label" />
             </x-ui.field>
 
 

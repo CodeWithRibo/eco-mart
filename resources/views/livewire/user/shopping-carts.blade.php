@@ -2,17 +2,24 @@
     {{--Carts--}}
     <div class="grid grid-cols-2 lg:grid-cols-3 gap-10">
         <div class="flex flex-col gap-5 col-span-2">
-            @foreach($cart as $index)
+            @php
+                $deliveryFee = 0;
+            @endphp
+            @forelse($cart as $index)
+                @php
+                    $deliveryFee = $index['delivery_fee'];
+                @endphp
                 <div class="bg-white rounded-lg shadow w-full p-4">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-5">
                             <div class="w-24 h-24 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-                                <img src="{{asset('storage/'. $index['product_image'])}}" class="w-full h-full object-cover object-center" alt="tomatoes">
+                                <img src="{{asset('storage/'. $index['product_image'])}}"
+                                     class="w-full h-full object-cover object-center" alt="tomatoes">
                             </div>
                             <div>
                                 <div class="space-y-2">
                                     <h2 class="text-xl text-gray-700">{{$index['product_name']}}</h2>
-                                    <p class="text-gray-500 text-sm">₱{{$index['price']}} / kg</p>
+                                    <p class="text-gray-500 text-sm">₱{{$index['price']}}/ kg</p>
                                 </div>
 
                                 <div class="flex items-center justify-between">
@@ -34,14 +41,16 @@
                         </div>
 
                         <div class="space-y-8">
-                            <p class="text-[#2E7D32] text-right">₱{{$index['subtotal'] ?? $index['price']}}</p>
+                            <p class="text-[#2E7D32] text-right">₱{{number_format($index['subtotal'], 2)}}</p>
                             <x-ui.icon
                                 wire:click="removeCart({{$index['id']}})"
                                 name="ps:trash" class="size-5 fill-red-500"/>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h1 class="text-center text-4xl text-gray-500 italic font-semibold py-10 lg:py-20">CART IS EMPTY</h1>
+            @endforelse
 
         </div>
         {{--Order Summary--}}
@@ -53,14 +62,13 @@
                         <span>₱{{$total ?? 0 }}</span>
                     </div>
                     @php
-                        $deliveryFee = 10;
-                        $totalDeliveryFee = number_format(($total / $deliveryFee), 2);
 
-                        $allTotal = $total + $totalDeliveryFee
+
+                        $allTotal = $total + $deliveryFee;
                     @endphp
                     <div class="flex items-center justify-between text-gray-500 ">
                         <span>Delivery Fee</span>
-                        <span>₱{{$totalDeliveryFee}}</span>
+                        <span>₱{{$deliveryFee}}</span>
                     </div>
             </span>
 
@@ -71,7 +79,28 @@
                 <span class="text-[#2E7D32] text-xl">₱{{$allTotal}}</span>
             </div>
 
-                <x-ui.button class="w-full bg-green-700 text-white py-3.5 rounded-xl hover:bg-[#66BB6A] transition-colors">Proceed to Checkout</x-ui.button>
+            @php
+                $disabled = false;
+
+                if ($total === 0){
+                     $disabled = true;
+                }
+
+            @endphp
+
+            @if($disabled)
+                <x-ui.button disabled
+                             class="w-full bg-gray-700 text-white py-3.5 rounded-xl cursor-not-allowed transition-colors">
+                    Proceed to Checkout
+                </x-ui.button>
+            @else
+                <x-ui.button
+                    class="w-full  bg-green-700 text-white py-3.5 rounded-xl hover:bg-[#66BB6A] transition-colors">
+                    <a href="{{route('shopping-carts.checkout')}}">
+                        Proceed to Checkout
+                    </a>
+                </x-ui.button>
+            @endif
 
         </div>
     </div>

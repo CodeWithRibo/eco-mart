@@ -6,6 +6,48 @@
         },
         "button": {
             "installationTime": 1763445517
+        },
+        "accordion": {
+            "installationTime": 1763550327
+        },
+        "modal": {
+            "installationTime": 1763572201
+        },
+        "label": {
+            "installationTime": 1763572666
+        },
+        "fieldset": {
+            "installationTime": 1763572699
+        },
+        "field": {
+            "installationTime": 1763572816
+        },
+        "input": {
+            "installationTime": 1763573016
+        },
+        "select": {
+            "installationTime": 1763573347
+        },
+        "popup": {
+            "installationTime": 1763573347
+        },
+        "text": {
+            "installationTime": 1763573349
+        },
+        "error": {
+            "installationTime": 1763638805
+        },
+        "toast": {
+            "installationTime": 1763640780
+        },
+        "badge": {
+            "installationTime": 1763669318
+        },
+        "tabs": {
+            "installationTime": 1763869781
+        },
+        "textarea": {
+            "installationTime": 1763935278
         }
     }
 }

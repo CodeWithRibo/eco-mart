@@ -49,6 +49,11 @@
             'fuchsia' => 'text-white dark:text-white bg-fuchsia-400 dark:bg-fuchsia-400 border-fuchsia-400 dark:border-fuchsia-400/90',
             'pink' => 'text-white dark:text-white bg-pink-400 dark:bg-pink-400 border-pink-400 dark:border-pink-400/90',
             'rose' => 'text-white dark:text-white bg-rose-400 dark:bg-rose-400 border-rose-400 dark:border-rose-400/90',
+            'organic' => 'text-white dark:text-white bg-green-700 dark:bg-green-700 border-green-700 dark:border-green-700/90',
+            'processing'=> 'text-yellow-600 dark:text-yellow-600 bg-yellow-100 dark: bg-yellow-100 border-yellow-100 dark:border-yellow-100',
+            'shipped'=> 'text-blue-600 dark:text-blue-600 bg-blue-100 dark: bg-blue-100 border-blue-100 dark:border-blue-100',
+            'delivered'=> 'text-green-600 dark:text-green-600 bg-green-100 dark: bg-green-100 border-green-100 dark:border-green-100',
+            'cancelled'=> 'text-red-600 dark:text-red-600 bg-red-100 dark: bg-red-100 border-red-100 dark:border-red-100',
         };
     }
 
@@ -73,14 +78,14 @@
 @endphp
 
 
-<x-ui.button.abstract 
+<x-ui.button.abstract
     {{ $attributes->class(Arr::toCssClasses($classes)) }}
     data-slot="badge"
 >
 
     @if (is_string($icon) && $icon !== '')
         <x-ui.icon :name="$icon" :variant="$iconVariant" class="{{ Arr::toCssClasses($iconClasses) }}"
-            data-slot="badge-icon" />
+                   data-slot="badge-icon"/>
     @else
         {{ $icon }}
     @endif
@@ -91,7 +96,7 @@
     @if ($iconAfter)
         @if (is_string($iconAfter))
             <x-ui.icon :name="$iconAfter" :variant="$iconVariant" class="{{ Arr::toCssClasses($iconClasses) }}"
-                data-slot="badge-icon:after" />
+                       data-slot="badge-icon:after"/>
         @else
             {{ $iconAfter }}
         @endif

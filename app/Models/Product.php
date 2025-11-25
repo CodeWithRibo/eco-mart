@@ -17,6 +17,8 @@ class Product extends Model
         'category',
         'price',
         'stock',
+        'unit',
+        'label',
     ];
 
     public function scopeSearch(Builder $query, $term)
