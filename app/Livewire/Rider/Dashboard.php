@@ -16,9 +16,8 @@ class Dashboard extends Component
 
         if ($delivery) {
             $delivery->update(['status' => 'Picked Up']);
-            // Update parent order status to reflect movement
             if ($delivery->order) {
-                $delivery->order->update(['status' => 'Shipped']); // or 'Out for Delivery'
+                $delivery->order->update(['status' => 'Shipped']);
             }
         }
     }
@@ -31,7 +30,6 @@ class Dashboard extends Component
 
         if ($delivery) {
             $delivery->update(['status' => 'Delivered']);
-            // Update parent order status to completed
             if ($delivery->order) {
                 $delivery->order->update(['status' => 'Delivered']);
             }
@@ -42,14 +40,12 @@ class Dashboard extends Component
     {
         $riderId = Auth::id();
 
-        // 1. Get Active Deliveries (Assigned or In Progress)
         $activeDeliveries = Delivery::with(['order.user', 'order.orderItems'])
             ->where('rider_id', $riderId)
             ->whereIn('status', ['Assigned', 'Picked Up'])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // 2. Calculate Stats for Today
         $completedToday = Delivery::where('rider_id', $riderId)
             ->where('status', 'Delivered')
             ->whereDate('updated_at', today())
@@ -57,7 +53,6 @@ class Dashboard extends Component
 
         $activeCount = $activeDeliveries->count();
 
-        // 3. Earnings Logic (Assuming sum of order totals delivered today, or replace with commission logic)
         $earningsToday = Delivery::where('rider_id', $riderId)
             ->where('status', 'Delivered')
             ->whereDate('updated_at', today())
