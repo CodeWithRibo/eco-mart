@@ -1,4 +1,4 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9ffdd643-9c77-4752-9cd2-81ba1bc2e653" />The Ecomart System is inspired by Ecomart Express, a store known for providing organic, natural, and eco-friendly products. This web-based platform was developed to offer customers a more convenient shopping experience, reducing the hassle of visiting the physical grocery store.
+The Ecomart System is inspired by Ecomart Express, a store known for providing organic, natural, and eco-friendly products. This web-based platform was developed to offer customers a more convenient shopping experience, reducing the hassle of visiting the physical grocery store.
 
 The system features three main user roles: Customer, Admin, and Rider,  each with functionalities designed to support smooth and efficient operations.
 
