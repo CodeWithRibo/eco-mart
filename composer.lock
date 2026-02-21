@@ -3429,16 +3429,16 @@
         },
         {
             "name": "sheaf/cli",
-            "version": "v1.3.2",
+            "version": "v1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sheafui/cli.git",
-                "reference": "c6716094495f770344005a046366edcb04d89b06"
+                "reference": "4bf1d1959f7a4c18b0d1388e6bb3509ce6253f79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sheafui/cli/zipball/c6716094495f770344005a046366edcb04d89b06",
-                "reference": "c6716094495f770344005a046366edcb04d89b06",
+                "url": "https://api.github.com/repos/sheafui/cli/zipball/4bf1d1959f7a4c18b0d1388e6bb3509ce6253f79",
+                "reference": "4bf1d1959f7a4c18b0d1388e6bb3509ce6253f79",
                 "shasum": ""
             },
             "require-dev": {
@@ -3483,9 +3483,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sheafui/cli/issues",
-                "source": "https://github.com/sheafui/cli/tree/v1.3.2"
+                "source": "https://github.com/sheafui/cli/tree/v1.3.4"
             },
-            "time": "2025-11-05T20:33:11+00:00"
+            "time": "2025-11-30T14:34:29+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -10044,5 +10044,5 @@
         "php": "^8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
