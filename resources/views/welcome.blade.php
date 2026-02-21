@@ -27,7 +27,7 @@
         <nav class="flex items-center justify-between mx-auto max-w-7xl px-6">
             <div class="flex items-center gap-3">
                        <span class="rounded-full p-[10px] bg-[#2E7D32]">
-                           <x-ui.icon name="ps:leaf" variant="bold" class="size-6 "/>
+                           <x-ui.icon name="ps:leaf" variant="bold" class="size-6 text-white "/>
                        </span>
                 <h1 class="text-2xl text-[#2E7D32]">EcoMart</h1>
             </div>
@@ -79,21 +79,21 @@
                 <div class=" pt-10  flex gap-16">
                     <div class="inline-flex items-center flex-col space-y-2">
                         <span class="rounded-full p-2 px-2 bg-green-700">
-                           <x-ui.icon name="ps:truck" variant="bold" class="size-6 "/>
+                           <x-ui.icon name="ps:truck" variant="bold" class="size-6 text-white "/>
                        </span>
                         <span class="text-gray-500 text-xs sm:text-base">Free Delivery</span>
                     </div>
 
                     <div class="inline-flex items-center flex-col space-y-2">
                         <span class="rounded-full p-2 px-2 bg-[#66BB6A]">
-                           <x-ui.icon name="ps:shield" variant="bold" class="size-6 "/>
+                           <x-ui.icon name="ps:shield" variant="bold" class="size-6 text-white "/>
                        </span>
                         <span class="text-gray-500 text-xs sm:text-base">100% Secure</span>
                     </div>
 
                     <div class="inline-flex items-center flex-col space-y-2">
                         <span class="rounded-full p-2 px-2 bg-[#F9C74F]">
-                           <x-ui.icon name="ps:sparkle" variant="bold" class="size-6 "/>
+                           <x-ui.icon name="ps:sparkle" variant="bold" class="size-6 text-white "/>
                        </span>
                         <span class="text-gray-500 text-xs sm:text-base">Best Quality</span>
                     </div>
@@ -107,7 +107,7 @@
                     class="w-full h-full object-cover rounded-3xl">
                 <div class="absolute bottom-[-1.5rem] left-[-1.5rem] inline-flex gap-5 rounded-2xl bg-white p-4 ">
                          <span class="rounded-full p-[10px] bg-[#2E7D32]">
-                           <x-ui.icon name="ps:leaf" variant="bold" class="size-6 "/>
+                           <x-ui.icon name="ps:leaf" variant="bold" class="size-6 text-white "/>
                        </span>
                     <span>
                             <h1 class="text-lg">{{$products ?? 0}}+ Products</h1>
@@ -130,7 +130,7 @@
                 <a class="inline-flex flex-col justify-center items-center text-center sm:text-start sm:items-start sm:justify-start bg-white py-6 px-8 rounded-xl hover:shadow-xl transition-all duration-300">
                     <span
                         class="rounded-xl p-[10px] bg-[#66bb6a] mb-1 w-16 h-16 hover:w-[70px] hover:h-[70px] transition-all duration-300 flex items-center justify-center">
-                           <x-ui.icon name="ps:carrot" variant="bold" class="size-8 "/>
+                           <x-ui.icon name="ps:carrot" variant="bold" class="size-8 text-white "/>
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Fruits & Vegetables</h2>
@@ -141,7 +141,7 @@
                 <a class="inline-flex flex-col justify-center items-center text-center sm:text-start sm:items-start sm:justify-start bg-white py-6 px-8 rounded-xl hover:shadow-xl transition-all duration-300">
                     <span
                         class="rounded-xl p-[10px] bg-[#f9c74f] mb-1 w-16 h-16 hover:w-[70px] hover:h-[70px] transition-all duration-300 flex items-center justify-center">
-                           <x-ui.icon name="ps:package" variant="bold" class="size-8 "/>
+                           <x-ui.icon name="ps:package" variant="bold" class="size-8 text-white "/>
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Dairy & Eggs</h2>
@@ -152,7 +152,7 @@
                 <a class="inline-flex flex-col justify-center items-center text-center sm:text-start sm:items-start sm:justify-start bg-white py-6 px-8 rounded-xl hover:shadow-xl transition-all duration-300">
                     <span
                         class="rounded-xl p-[10px] bg-[#8d6e63] mb-1 w-16 h-16 hover:w-[70px] hover:h-[70px] transition-all duration-300 flex items-center justify-center">
-                           <x-ui.icon name="ps:cookie" variant="bold" class="size-8 "/>
+                           <x-ui.icon name="ps:cookie" variant="bold" class="size-8 text-white "/>
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Bakery</h2>
@@ -163,7 +163,7 @@
                 <a class="inline-flex flex-col justify-center items-center text-center sm:text-start sm:items-start sm:justify-start bg-white py-6 px-8 rounded-xl hover:shadow-xl transition-all duration-300">
                     <span
                         class="rounded-xl p-[10px] bg-[#66bb6a] mb-1 w-16 h-16 hover:w-[70px] hover:h-[70px] transition-all duration-300 flex items-center justify-center">
-                           <x-ui.icon name="ps:jar-label" variant="bold" class="size-8 "/>
+                           <x-ui.icon name="ps:jar-label" variant="bold" class="size-8 text-white "/>
                     </span>
                     <span>
                         <h2 class="text-xl mb-2 font-semibold text-gray-800">Beverage</h2>
@@ -186,60 +186,6 @@
                 <p class="text-gray-500 text-sm">Real feedback from people who love EcoMart</p>
             </span>
 
-            @auth
-                    <x-ui.modal.trigger id="testimonial-modal">
-                        <x-ui.button class="rounded-full px-6 py-3 bg-green-700 text-white hover:opacity-80">
-                            Share Your Feedback
-                        </x-ui.button>
-                    </x-ui.modal.trigger>
-                @endauth
-                <x-ui.modal
-                    id="testimonial-modal"
-                    heading="Share Your Experience"
-                    description="We appreciate your honest feedback!"
-                >
-
-                    {{-- Hidden fields for authenticated user --}}
-{{--                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}
-{{--                    <input type="hidden" name="name" value="{{ auth()->user()->name }}">--}}
-{{--                    <input type="hidden" name="email" value="{{ auth()->user()->email }}">--}}
-
-                    <form method="POST" action="" class="space-y-6">
-                        @csrf
-
-                        {{-- Rating --}}
-                        <x-ui.field required>
-                            <x-ui.label>Rating</x-ui.label>
-                            <select name="rating" class="w-full border rounded-lg p-3">
-                                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
-                                <option value="4">⭐⭐⭐⭐ - Very Good</option>
-                                <option value="3">⭐⭐⭐ - Good</option>
-                                <option value="2">⭐⭐ - Fair</option>
-                                <option value="1">⭐ - Poor</option>
-                            </select>
-                        </x-ui.field>
-
-                        {{-- Message --}}
-                        <x-ui.field required>
-                            <x-ui.label>Your Feedback</x-ui.label>
-                            <x-ui.textarea
-                                name="message"
-                                placeholder="Tell us about your experience..."
-                                class="h-32"
-                            />
-                        </x-ui.field>
-
-                        {{-- Submit Button --}}
-                        <div class="flex justify-end">
-                            <x-ui.button
-                                type="submit"
-                                class="bg-green-700 text-white rounded-lg px-6 py-3 hover:opacity-80">
-                                Submit Feedback
-                            </x-ui.button>
-                        </div>
-                    </form>
-
-                </x-ui.modal>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -247,9 +193,9 @@
                 {{-- Testimonial Card 1 --}}
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="{{ asset('profile_1.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
+                        <img src="{{ asset('boy-pfp.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
                         <div>
-                            <h3 class="font-semibold text-lg">Maria Santos</h3>
+                            <h3 class="font-semibold text-lg">John doe</h3>
                             <p class="text-gray-500 text-sm">Verified Customer</p>
                         </div>
                     </div>
@@ -261,7 +207,7 @@
                 {{-- Testimonial Card 2 --}}
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="{{ asset('profile_2.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
+                        <img src="{{ asset('boy-pfp.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
                         <div>
                             <h3 class="font-semibold text-lg">John Reyes</h3>
                             <p class="text-gray-500 text-sm">Loyal Shopper</p>
@@ -275,7 +221,7 @@
                 {{-- Testimonial Card 3 --}}
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="{{ asset('profile_3.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
+                        <img src="{{ asset('boy-pfp.jpg') }}" class="w-14 h-14 rounded-full object-cover" alt="">
                         <div>
                             <h3 class="font-semibold text-lg">Liza Mendoza</h3>
                             <p class="text-gray-500 text-sm">Eco-Friendly Mom</p>

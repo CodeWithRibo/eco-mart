@@ -25,7 +25,7 @@ new class extends Component {
                     <a href="{{ route('dashboard') }}" wire:navigate>
                         <div class="flex items-center gap-3">
                        <span class="rounded-full p-[10px] bg-[#2E7D32]">
-                           <x-ui.icon name="ps:leaf" variant="bold" class="size-6 "/>
+                           <x-ui.icon name="ps:leaf" variant="bold" class="size-6 text-white "/>
                        </span>
                             <h1 class="text-2xl text-[#2E7D32]">EcoMart</h1>
                         </div>
