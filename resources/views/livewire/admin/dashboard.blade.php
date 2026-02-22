@@ -158,19 +158,19 @@
                         <td>
                             @switch($order->status)
                                 @case('Processing')
-                                    <x-ui.badge pill class="rounded-full mb-5"
+                                    <x-ui.badge pill class="rounded-full"
                                                 color="processing">{{$order->status}}</x-ui.badge>
                                     @break
                                 @case('Shipped')
-                                    <x-ui.badge pill class="rounded-full mb-5"
+                                    <x-ui.badge pill class="rounded-full"
                                                 color="shipped">{{$order->status}}</x-ui.badge>
                                     @break
                                 @case('Delivered')
-                                    <x-ui.badge pill class="rounded-full mb-5"
+                                    <x-ui.badge pill class="rounded-full"
                                                 color="delivered">{{$order->status}}</x-ui.badge>
                                     @break
                                 @case('Cancelled')
-                                    <x-ui.badge pill class="rounded-full mb-5"
+                                    <x-ui.badge pill class="rounded-full"
                                                 color="cancelled">{{$order->status}}</x-ui.badge>
                                     @break
                             @endswitch
@@ -216,19 +216,19 @@
                                 <h1>
                                     @switch($order->status)
                                         @case('Processing')
-                                            <x-ui.badge pill class="rounded-full mb-5"
+                                            <x-ui.badge pill class="rounded-full"
                                                         color="processing">{{$order->status}}</x-ui.badge>
                                             @break
                                         @case('Shipped')
-                                            <x-ui.badge pill class="rounded-full mb-5"
+                                            <x-ui.badge pill class="rounded-full"
                                                         color="shipped">{{$order->status}}</x-ui.badge>
                                             @break
                                         @case('Delivered')
-                                            <x-ui.badge pill class="rounded-full mb-5"
+                                            <x-ui.badge pill class="rounded-full"
                                                         color="delivered">{{$order->status}}</x-ui.badge>
                                             @break
                                         @case('Cancelled')
-                                            <x-ui.badge pill class="rounded-full mb-5"
+                                            <x-ui.badge pill class="rounded-full"
                                                         color="cancelled">{{$order->status}}</x-ui.badge>
                                             @break
                                     @endswitch
