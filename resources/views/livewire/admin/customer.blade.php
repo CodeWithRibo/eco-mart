@@ -88,15 +88,6 @@
                             Email</label>
                         <p>{{$customer->email}}</p>
                     </div>
-                {{----}}
-                    <div class="mb-2">
-                        <label for="address" class="text-gray-500 text-sm flex items-center">
-                            <x-ui.icon name="ps:map-pin" class="size-6 fill-gray-500"/>
-                            Address</label>
-{{--                        @foreach($customer->orders as $order)--}}
-{{--                        <p>{{$customer->orders->address}}</p>--}}
-{{--                        @endforeach--}}
-                    </div>
                     <div class="w-full border border-gray-100 my-2"></div>
                     <div class="grid grid-cols-3 gap-10 py-4">
                         <div class="text-center">
