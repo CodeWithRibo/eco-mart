@@ -104,7 +104,7 @@ class CheckoutCreate extends Component
 
             $orderNumber = 'ORD-' . $currentYear . '-' . $nextNumber;
 
-            $order = Order::create([
+            $order = Order::query()->create([
                 'total_amount' => $total + $this->deliveryFee,
                 'order_number' => $orderNumber,
                 'payment_method' => $this->payment_method,
@@ -114,7 +114,7 @@ class CheckoutCreate extends Component
 
             foreach ($cart as $item) {
 
-                OrderItem::create([
+                OrderItem::query()->create([
                     'order_id'     => $order->id,
                     'product_id'   => $item['id'],
                     'product_name' => $item['product_name'],
@@ -123,12 +123,12 @@ class CheckoutCreate extends Component
                     'unit_price'   => $item['price'],
                 ]);
 
-                Product::where('id', $item['id'])
+                Product::query()->where('id', $item['id'])
                     ->decrement('stock', $item['quantity']);
             }
 
 
-            Delivery::create([
+            Delivery::query()->create([
                 'first_name'     => $this->first_name,
                 'last_name'      => $this->last_name,
                 'email'          => $this->email,
