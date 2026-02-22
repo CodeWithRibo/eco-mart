@@ -118,8 +118,8 @@
 
         {{--List Products--}}
         <div class="lg:col-span-3 px-10 lg:px-0">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($products as $product)
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+                @forelse($products as $product)
                     <div class="card-group space-y-5 relative ">
                         <x-ui.badge pill color="organic" class="absolute right-2 top-2 text-xs">{{$product->label}}</x-ui.badge>
                         <img src="{{$product->product_image}}"
@@ -140,7 +140,9 @@
                             </x-ui.button>
                         </div>
                     </div>
-                @endforeach
+                    @empty
+                    <div class="text-center text-3xl text-gray-400 italic">Product not found</div>
+                @endforelse
             </div>
         </div>
     </div>
