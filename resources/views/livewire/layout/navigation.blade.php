@@ -50,11 +50,7 @@ new class extends Component {
 
         @php
             $cart = session('cart');
-
-            if (is_array($cart)) {
-                $count = count($cart) ;
-            } else $count = 0;
-
+            (is_array($cart)) ? $count = count($cart) :  $count = 0;
         @endphp
             {{--Cart--}}
             <a href="{{route('shopping-carts')}}" class="pr-5 absolute right-[7.5rem]  bottom-6 z-50">
