@@ -6,20 +6,20 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <x-ui.field required>
                             <x-ui.label>First Name</x-ui.label>
-                            <x-ui.input wire:model="first_name" placeholder="Enter your first name"/>
+                            <x-ui.input wire:model="first_name" placeholder="Juan"/>
                             <x-ui.error name="first_name"/>
                         </x-ui.field>
 
                         <x-ui.field required>
                             <x-ui.label>Last Name</x-ui.label>
-                            <x-ui.input wire:model="last_name" placeholder="Enter your last name"/>
+                            <x-ui.input wire:model="last_name" placeholder="Dela Cruz"/>
                             <x-ui.error name="last_name"/>
                         </x-ui.field>
                     </div>
 
                     <x-ui.field>
                         <x-ui.label>Email</x-ui.label>
-                        <x-ui.input wire:model="email" type="email" placeholder="Enter your email address"/>
+                        <x-ui.input wire:model="email" type="email" placeholder="juan@example.com"/>
                         <x-ui.error name="email"/>
                     </x-ui.field>
 
@@ -27,14 +27,14 @@
                         <x-ui.field>
                             <x-ui.label>Phone</x-ui.label>
                             <x-ui.input wire:model="phone_number" type="tel"
-                                        placeholder="Enter your phone number"/>
+                                        placeholder="09933404219"/>
                             <x-ui.error name="phone_number"/>
                         </x-ui.field>
 
                         <x-ui.field>
                             <x-ui.label>Address</x-ui.label>
                             <x-ui.input wire:model="address"
-                                        placeholder="Enter your address"/>
+                                        placeholder="Blk5 Lot10 Bagong Sibol St."/>
                             <x-ui.error name="address"/>
                         </x-ui.field>
                     </div>
@@ -79,7 +79,7 @@
 
                     <x-ui.field>
                         <x-ui.label>Delivery Notes (Optional)</x-ui.label>
-                        <x-ui.input wire:model="delivery_notes" placeholder="Enter notes..."/>
+                        <x-ui.input wire:model="delivery_notes" placeholder="Paki careful po"/>
                         <x-ui.error name="delivery_notes"/>
                     </x-ui.field>
 

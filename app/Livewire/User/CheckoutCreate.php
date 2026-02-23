@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -92,7 +93,7 @@ class CheckoutCreate extends Component
                 }
             }
 
-            $latestOrder = Order::latest('id')->first();
+            $latestOrder = Order::query()->latest('id')->first();
             $currentYear = Carbon::now()->year;
 
             if ($latestOrder) {
@@ -146,7 +147,7 @@ class CheckoutCreate extends Component
 
             session()->forget('cart');
             $this->successCheckout('Successfully Checkout');
-            return redirect()->route('shopping-carts');
+            return redirect()->route('order-successful');
 
         } catch (\Exception $e) {
 
@@ -158,7 +159,7 @@ class CheckoutCreate extends Component
     }
 
 
-    public function render()
+    public function render() : View
     {
         return view('livewire.user.checkout-create');
     }
