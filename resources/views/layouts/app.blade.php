@@ -35,8 +35,8 @@
             </main>
         </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    @livewireScripts
     <script src="{{ asset('ph-address-selector.js') }}"></script>
+    @livewireScripts
 
     @stack('scripts')
     </body>
