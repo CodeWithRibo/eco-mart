@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderItem extends Model
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'product_name',
         'unit_price',
@@ -18,11 +16,19 @@ class OrderItem extends Model
         'subtotal',
         'order_id',
         'product_id',
+        'user_id',
     ];
+
+    use HasFactory, SoftDeletes;
 
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function users() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function product(): BelongsTo

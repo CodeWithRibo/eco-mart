@@ -26,12 +26,18 @@ class Delivery extends Model
         'delivery_notes',
         'order_id',
         'rider_id',
+        'user_id',
         'status',
     ];
 
     public function rider()
     {
         return $this->belongsTo(User::class, 'rider_id');
+    }
+
+    public function users() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function order(): BelongsTo
     {
