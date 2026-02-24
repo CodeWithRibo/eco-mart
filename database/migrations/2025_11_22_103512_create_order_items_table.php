@@ -13,6 +13,11 @@ return new class extends Migration {
             $table->string('unit_price');
             $table->string('quantity');
             $table->string('subtotal');
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->foreignId('order_id')
                 ->nullable()
                 ->constrained()

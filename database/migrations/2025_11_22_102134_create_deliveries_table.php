@@ -19,6 +19,11 @@ return new class extends Migration {
             $table->string('city');
             $table->string('barangay');
             $table->string('delivery_notes')->nullable();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->foreignId('order_id')
                 ->nullable()
                 ->constrained()
