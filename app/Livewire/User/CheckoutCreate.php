@@ -122,6 +122,7 @@ class CheckoutCreate extends Component
                     'subtotal'     => $item['subtotal'],
                     'quantity'     => $item['quantity'],
                     'unit_price'   => $item['price'],
+                    'user_id'      => auth()->id()
                 ]);
 
                 Product::query()->where('id', $item['id'])
@@ -141,6 +142,7 @@ class CheckoutCreate extends Component
                 'barangay'       => $this->barangay,
                 'delivery_notes' => $this->delivery_notes,
                 'order_id'       => $order->id,
+                'user_id'       => auth()->id()
             ]);
 
             DB::commit();
