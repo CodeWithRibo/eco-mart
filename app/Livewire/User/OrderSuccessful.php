@@ -5,10 +5,26 @@ namespace App\Livewire\User;
 use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Livewire\Component;
 
 class OrderSuccessful extends Component
 {
+
+    /**
+     * @throws BindingResolutionException
+     */
+    public function downloadReceipt()
+    {
+        /*TEMPORARY DATA*/
+        $data = ['message' => 'testing'];
+        $pdf = Pdf::loadView('user.invoice', $data);
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'invoice.pdf');
+    }
+
     public function render()
     {
 
