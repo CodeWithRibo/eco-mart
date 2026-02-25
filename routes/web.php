@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\OrderSuccessfulController;
 use App\Http\Controllers\Rider\RiderDashboardController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ShoppingCartController;
@@ -25,6 +26,7 @@ Route::middleware(['auth', 'verified', 'is_customer'])->group(function () {
     Route::get('shopping-carts/checkout', CheckoutController::class)->name('shopping-carts.checkout');
     Route::get('order-history', OrderHistoryController::class)->name('order-history');
     Route::get('order-successful', OrderSuccessfulController::class)->name('order-successful');
+    Route::get('invoice', InvoiceController::class)->name('invoice');
 });
 
 /*Routing for Admin*/
