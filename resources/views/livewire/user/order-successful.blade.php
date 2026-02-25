@@ -52,8 +52,13 @@
             @endforeach
        </fieldset>
     <div class="grid sm:grid-cols-2 md:grid-cols-3 grid-rows-1 items-center justify-center gap-2  mx-auto max-w-xl w-full">
-        <x-ui.button class="rounded-full" size="md" variant="outline" color="emerald" icon="arrow-down-tray">Download Receipt</x-ui.button>
-        <x-ui.button class="rounded-full bg-green-700 text-white" size="md" color="solid" icon="ps:package">Continue Shopping</x-ui.button>
-        <x-ui.button class="rounded-full border bg-white " size="md" variant="solid" color="white" icon="ps:house">Back to Home</x-ui.button>
+            <x-ui.button wire:click="downloadReceipt" class="rounded-full" size="sm" variant="outline" color="emerald" icon="arrow-down-tray">Download Receipt</x-ui.button>
+            <x-ui.button class="rounded-full bg-green-700 text-white" size="sm" color="solid" icon="ps:package">
+                <a href="{{route('products')}}">Continue Shopping</a>
+            </x-ui.button>
+        <x-ui.button class="rounded-full border bg-white " size="sm" variant="solid" color="white" icon="ps:house">
+            <a href="{{route('dashboard')}}">Back to Home</a>
+        </x-ui.button>
+
     </div>
 </div>
