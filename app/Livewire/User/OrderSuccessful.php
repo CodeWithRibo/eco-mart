@@ -5,20 +5,32 @@ namespace App\Livewire\User;
 use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Services\OrderDetailsService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Livewire\Component;
 
 class OrderSuccessful extends Component
 {
-
+    public $latestId;
+    public $currentUser;
+    public function mount(): void
+    {
+        $this->latestId = OrderDetailsService::latestOrderId(auth()->id());
+        $this->currentUser = auth()->id();
+    }
     /**
      * @throws BindingResolutionException
      */
     public function downloadReceipt()
     {
-        /*TEMPORARY DATA*/
-        $data = ['message' => 'testing'];
+        $data = [
+            'deliveryAddress' => OrderDetailsService::getDeliveryAddress($this->currentUser),
+            'orderItems' => OrderDetailsService::getOrderItemDetails($this->currentUser),
+            'order' => OrderDetailsService::getOrderDetails($this->currentUser),
+            'subtotal' => OrderDetailsService::getOrderItemSubTotal($this->currentUser)
+        ];
+
         $pdf = Pdf::loadView('user.invoice', $data);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
@@ -28,49 +40,11 @@ class OrderSuccessful extends Component
     public function render()
     {
 
-        $latestOrderId = OrderItem::query()->where('user_id', auth()->id())
-            ->latest()
-            ->value('order_id');
-
-        $deliveryAddress = Delivery::query()
-            ->select([
-            'first_name',
-            'last_name',
-            'phone_number',
-            'address',
-            'region',
-            'province',
-            'city',
-            'barangay',
-        ])
-            ->where('user_id', auth()->id())
-            ->where('order_id', $latestOrderId)
-            ->get();
-
-        $orders = Order::query()->select([
-            'total_amount',
-            'created_at',
-            'order_number'
-        ])
-            ->where('user_id', auth()->id())
-            ->latest()
-            ->first();
-
-        $orderItems = OrderItem::query()->select([
-            'product_name',
-            'unit_price',
-            'quantity',
-            'subtotal',
-        ])
-            ->where('user_id', auth()->id())
-            ->where('order_id', $latestOrderId)
-            ->get();
-
-
-        return view('livewire.user.order-successful', compact([
-            'deliveryAddress',
-            'orderItems',
-            'orders'
-        ]));
+        return view('livewire.user.order-successful',
+        [
+            'deliveryAddress' => OrderDetailsService::getDeliveryAddress($this->currentUser),
+            'orderItems' => OrderDetailsService::getOrderItemDetails($this->currentUser),
+            'orders' => OrderDetailsService::getOrderDetails($this->currentUser)
+         ]);
     }
 }
