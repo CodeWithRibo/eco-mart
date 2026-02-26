@@ -107,19 +107,26 @@
 <div class="header">
     <div class="invoice-meta">
         <div class="invoice-title">Invoice</div>
-        <div><strong>Order ID:</strong> ORD-2026-001</div>
-        <div><strong>Order Date:</strong> 2025-10-24</div>
-        <div><strong>Estimated Delivery:</strong> 2025-10-24</div>
-        <div><strong>Payment Method:</strong> Cash</div>
+        <div><strong>Order ID:</strong> {{$order->order_number}}</div>
+        <div><strong>Order Date:</strong> {{\Carbon\Carbon::parse($order->created_at)->format('F d, Y')}}</div>
+        @php
+        @endphp
+        <div><strong>Estimated Delivery:</strong> {{\Carbon\Carbon::parse($order->created_at)
+            ->addDays(3)
+            ->format('F d, Y')}}
+        </div>
+        <div><strong>Payment Method:</strong> {{$order->payment_method}}</div>
     </div>
 </div>
-
 <div class="recipient">
     <strong>Recipient:</strong>
-    <br>Customer: Pedro Mabaog
-    <br>Contact Number: 0993340418
-    <br>Address: Blk5 Lot1 Bagong Sibol St
-    Casiguran, Ditinagyan Region III (Central Luzon), Aurora
+    <br>Customer: {{$deliveryAddress->first_name}} {{$deliveryAddress->last_name}}
+    <br>Contact Number: {{$deliveryAddress->phone_number}}
+    <br>Address:
+    {{ $deliveryAddress->address }},
+    {{ $deliveryAddress->barangay_name }},
+    {{ $deliveryAddress->city_name }},
+    {{ $deliveryAddress->region_name }}
 </div>
 <strong>Order Details</strong>
 <table>
@@ -133,24 +140,25 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>1</td>
-        <td>Milk</td>
-        <td style="text-align: right;">x1</td>
-        <td style="text-align: right;">PHP 100.00</td>
-        <td style="text-align: right;">PHP 100.00</td>
-    </tr>
+    @foreach($orderItems as $item)
+        <tr>
+            <td>{{$item->id}}</td>
+            <td>{{$item->product_name}}</td>
+            <td style="text-align: right;">x{{$item->quantity}}</td>
+            <td style="text-align: right;">PHP {{number_format($item->unit_price, 2)}}</td>
+            <td style="text-align: right;">PHP {{number_format($item->subtotal, 2)}}</td>
+        </tr>
+    @endforeach
     </tbody>
 </table>
 
 <div class="totals">
-    <table>
-        <tr><td>Subtotal:</td><td style="text-align:right;">PHP 100.00</td></tr>
-        <tr><td>Shipping Fee:</td><td style="text-align:right;">PHP 50.00</td></tr>
-        <tr><td><strong>Total:</strong></td><td style="text-align:right;"><strong>PHP 150.00</strong></td></tr>
-    </table>
+        <table>
+            <tr><td>Subtotal:</td><td style="text-align:right;">PHP {{number_format($subtotal, 2)}} </td></tr>
+            <tr><td>Shipping Fee:</td><td style="text-align:right;">PHP 40.00</td></tr>
+            <tr><td><strong>Total:</strong></td><td style="text-align:right;"><strong>PHP {{number_format($subtotal + 40, 2)}}</strong></td></tr>
+        </table>
 </div>
-
 
 <div class="notes">
 </div>
@@ -158,12 +166,13 @@
 
 <div class="bottom-container">
     <div class="sender-details">
-        <strong>Company Name: BNB Software Company</strong><br>
-        Address: 25 Calachuchi St Navotas City Manila, Metro Manila<br>
+        <strong>Company Name: GHAGI MAN PRODUCTION</strong><br>
+        Address: 109 Samson Road corner Caimito Road, Caloocan City, 1400 Metro Manila<br>
         Phone: 09933404418<br>
-        Email: bnb@gmail.com
+        Email: gmp@gmail.com
     </div>
 
 </div>
+@livewireScripts
 </body>
 </html>
