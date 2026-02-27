@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class=" py-24 bg-[#FAFAFA]">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="">
@@ -10,7 +9,7 @@
                 </div>
             </div>
             <div class="p-6">
-                    @livewire('user.order-history')
+             @livewire('user.order-history')
             </div>
         </div>
     </div>
