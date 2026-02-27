@@ -2,12 +2,8 @@
 
 namespace App\Livewire\User;
 
-use App\Models\Delivery;
-use App\Models\Order;
-use App\Models\OrderItem;
 use App\Services\OrderDetailsService;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Livewire\Component;
 
 class OrderSuccessful extends Component
@@ -19,9 +15,7 @@ class OrderSuccessful extends Component
         $this->latestId = OrderDetailsService::latestOrderId(auth()->id());
         $this->currentUser = auth()->id();
     }
-    /**
-     * @throws BindingResolutionException
-     */
+
     public function downloadReceipt()
     {
         $data = [
