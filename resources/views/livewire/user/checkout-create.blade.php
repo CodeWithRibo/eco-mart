@@ -6,11 +6,11 @@
             </x-ui.modal.trigger>
             <x-ui.modal
                 id="add-address-modal"
-                heading="Delivery Information"
+                heading="Address Information"
                 width="3xl"
             >
                 <div class="bg-white shadow rounded-lg p-5 col-span-2">
-                    <x-ui.fieldset label="Deliver Information" class="space-y-2">
+                    <x-ui.fieldset label="" class="space-y-2">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <x-ui.field required>
                                 <x-ui.label>First Name</x-ui.label>
@@ -84,27 +84,7 @@
                                 <x-ui.error name="barangay"/>
                             </x-ui.field>
                         </div>
-
-                        <x-ui.field>
-                            <x-ui.label>Delivery Notes (Optional)</x-ui.label>
-                            <x-ui.input wire:model="delivery_notes" placeholder="Paki careful po"/>
-                            <x-ui.error name="delivery_notes"/>
-                        </x-ui.field>
-
-                        <!-- Invalid state -->
-                        <x-ui.field>
-                            <x-ui.label>Payment Method</x-ui.label>
-                            <x-ui.select
-                                placeholder="Select a payment method"
-                                icon="exclamation-circle"
-                                wire:model="payment_method">
-                                <x-ui.select.option value="Cash on Delivery">Cash On Delivery</x-ui.select.option>
-                                <x-ui.select.option value="Bank">Bank</x-ui.select.option>
-                                <x-ui.select.option value="Wallet">Wallet</x-ui.select.option>
-                            </x-ui.select>
-                            <x-ui.error name="payment_method"/>
-                        </x-ui.field>
-                      <div class="flex justify-center">
+                      <div class="flex justify-center mt-5">
                           <x-ui.button  color="emerald" class="w-full border-0 cursor-pointer hover:opacity-80 transition-all duration-300">Submit</x-ui.button>
                       </div>
                     </x-ui.fieldset>
