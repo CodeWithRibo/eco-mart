@@ -39,7 +39,14 @@ trait HasToast
         );
     }
 
-
+    public  function addAddressFailed(string $content)
+    {
+        return $this->dispatch('notify',
+            type: 'error',
+            content: $content,
+            duration: 4000
+        );
+    }
 
     public function existingAddedCart(string $content): void
     {
