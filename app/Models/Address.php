@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 
-class Delivery extends Model
+class Address extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -23,7 +23,6 @@ class Delivery extends Model
         'province',
         'city',
         'barangay',
-        'delivery_notes',
         'order_id',
         'rider_id',
         'user_id',

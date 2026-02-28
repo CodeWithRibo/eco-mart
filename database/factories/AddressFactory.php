@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Delivery;
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class DeliveryFactory extends Factory
+class AddressFactory extends Factory
 {
-    protected $model = Delivery::class;
+    protected $model = Address::class;
 
     public function definition(): array
     {

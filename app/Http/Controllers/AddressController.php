@@ -3,35 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DeliveryRequest;
-use App\Models\Delivery;
+use App\Models\Address;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class DeliveryController extends Controller
+class AddressController extends Controller
 {
     use AuthorizesRequests;
 
     public function index()
     {
-        $this->authorize('viewAny', Delivery::class);
+        $this->authorize('viewAny', Address::class);
 
-        return Delivery::all();
+        return Address::all();
     }
 
     public function store(DeliveryRequest $request)
     {
-        $this->authorize('create', Delivery::class);
+        $this->authorize('create', Address::class);
 
-        return Delivery::create($request->validated());
+        return Address::create($request->validated());
     }
 
-    public function show(Delivery $delivery)
+    public function show(Address $delivery)
     {
         $this->authorize('view', $delivery);
 
         return $delivery;
     }
 
-    public function update(DeliveryRequest $request, Delivery $delivery)
+    public function update(DeliveryRequest $request, Address $delivery)
     {
         $this->authorize('update', $delivery);
 
@@ -40,7 +40,7 @@ class DeliveryController extends Controller
         return $delivery;
     }
 
-    public function destroy(Delivery $delivery)
+    public function destroy(Address $delivery)
     {
         $this->authorize('delete', $delivery);
 
