@@ -119,7 +119,7 @@
                                                     $deliveryAddress = $fullAddress->address . $fullAddress->barangay . ',' . $fullAddress->city . ',' . $fullAddress->province;
 
                                                 @endphp
-                                                <p class="text-gray-800 text-base">{{ $order->delivery ? $deliveryAddress  : 'No Delivery Address Found'}}</p>
+                                                <p class="text-gray-800 text-base">{{ $order->delivery ? $deliveryAddress  : 'No Address Address Found'}}</p>
 
                                             </div>
 
@@ -267,7 +267,7 @@
 
                                                     <div class="my-3">
                                                         <h1 class="text-gray-500 text-sm">Delivery Address</h1>
-                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Delivery Address Found'}}</p>
+                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Address Address Found'}}</p>
 
                                                     </div>
 
@@ -430,7 +430,7 @@
 
                                                     <div class="my-3">
                                                         <h1 class="text-gray-500 text-sm">Delivery Address</h1>
-                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Delivery Address Found'}}</p>
+                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Address Address Found'}}</p>
 
                                                     </div>
 
@@ -569,7 +569,7 @@
 
                                                     <div class="my-3">
                                                         <h1 class="text-gray-500 text-sm">Delivery Address</h1>
-                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Delivery Address Found'}}</p>
+                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Address Address Found'}}</p>
 
                                                     </div>
 
@@ -708,7 +708,7 @@
 
                                                     <div class="my-3">
                                                         <h1 class="text-gray-500 text-sm">Delivery Address</h1>
-                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Delivery Address Found'}}</p>
+                                                        <p class="text-gray-800 text-base">{{ $order->delivery ? $order->delivery->address : 'No Address Address Found'}}</p>
 
                                                     </div>
 
