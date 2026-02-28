@@ -4,7 +4,7 @@ namespace App\Livewire\User;
 
 use App\Contracts\CartServiceInterface;
 use App\Livewire\Concerns\HasToast;
-use App\Models\Delivery;
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -19,18 +19,6 @@ use Psr\Container\NotFoundExceptionInterface;
 class CheckoutCreate extends Component
 {
     use HasToast;
-
-    /*Delivery Information*/
-    public $first_name;
-    public $last_name;
-    public $email;
-    public $phone_number;
-    public $address;
-    public $region;
-    public $province;
-    public $city;
-    public $barangay;
-    public $delivery_notes;
 
     /*Orders*/
     public $payment_method;
@@ -48,16 +36,6 @@ class CheckoutCreate extends Component
     protected function rules(): array
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'email|required',
-            'address' => 'required',
-            'phone_number' => ['required', 'max:11', 'regex:/^[0-9]+$/'],
-            'region' => 'required',
-            'province' => 'required',
-            'city' => 'required',
-            'barangay' => 'required',
-            'delivery_notes' => 'nullable',
             'payment_method' => 'required',
         ];
     }
@@ -128,22 +106,6 @@ class CheckoutCreate extends Component
                 Product::query()->where('id', $item['id'])
                     ->decrement('stock', $item['quantity']);
             }
-
-
-            Delivery::query()->create([
-                'first_name'     => $this->first_name,
-                'last_name'      => $this->last_name,
-                'email'          => $this->email,
-                'phone_number'   => $this->phone_number,
-                'address'        => $this->address,
-                'region'         => $this->region,
-                'province'       => $this->province,
-                'city'           => $this->city,
-                'barangay'       => $this->barangay,
-                'delivery_notes' => $this->delivery_notes,
-                'order_id'       => $order->id,
-                'user_id'       => auth()->id()
-            ]);
 
             DB::commit();
 
