@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Rider;
 
-use App\Models\Delivery;
+use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -10,7 +10,7 @@ class Dashboard extends Component
 {
     public function markPickedUp($deliveryId)
     {
-        $delivery = Delivery::where('id', $deliveryId)
+        $delivery = Address::where('id', $deliveryId)
             ->where('rider_id', Auth::id())
             ->first();
 
@@ -24,7 +24,7 @@ class Dashboard extends Component
 
     public function markDelivered($deliveryId)
     {
-        $delivery = Delivery::where('id', $deliveryId)
+        $delivery = Address::where('id', $deliveryId)
             ->where('rider_id', Auth::id())
             ->first();
 
@@ -40,20 +40,20 @@ class Dashboard extends Component
     {
         $riderId = Auth::id();
 
-        $activeDeliveries = Delivery::with(['order.user', 'order.orderItems'])
+        $activeDeliveries = Address::with(['order.user', 'order.orderItems'])
             ->where('rider_id', $riderId)
             ->whereIn('status', ['Assigned', 'Picked Up'])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $completedToday = Delivery::where('rider_id', $riderId)
+        $completedToday = Address::where('rider_id', $riderId)
             ->where('status', 'Delivered')
             ->whereDate('updated_at', today())
             ->count();
 
         $activeCount = $activeDeliveries->count();
 
-        $earningsToday = Delivery::where('rider_id', $riderId)
+        $earningsToday = Address::where('rider_id', $riderId)
             ->where('status', 'Delivered')
             ->whereDate('updated_at', today())
             ->get()

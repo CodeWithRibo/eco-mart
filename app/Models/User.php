@@ -46,9 +46,9 @@ class User extends Authenticatable
         return $this->hasMany(OrderItem::class, 'user_id');
     }
 
-    public function deliveries() : HasMany
+    public function addresses() : HasMany
     {
-        return $this->hasMany(Delivery::class, 'user_id');
+        return $this->hasMany(Address::class, 'user_id');
     }
 
     public function scopeSearch(Builder $query, $term)

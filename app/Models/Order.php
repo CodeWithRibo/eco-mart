@@ -33,9 +33,9 @@ class Order extends Model
         return $this->hasMany(OrderItem::class, 'order_id');
     }
 
-    public function delivery(): HasOne
+    public function address(): HasOne
     {
-        return $this->hasOne(Delivery::class, 'order_id');
+        return $this->hasOne(Address::class, 'order_id');
     }
 
     public function scopeSearch(Builder $query, $term)

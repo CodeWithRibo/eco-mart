@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Delivery;
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 
@@ -50,7 +50,7 @@ class OrderDetailsService
     public static function getDeliveryAddress($authId)
     {
         $orderId = self::latestOrderId($authId);
-        return Delivery::query()
+        return Address::query()
             ->where('user_id', $authId)
             ->where('order_id', $orderId)
             ->select(['first_name', 'last_name', 'phone_number', 'address', 'region', 'province', 'city', 'barangay'])

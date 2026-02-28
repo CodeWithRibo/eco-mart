@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\Delivery;
+use App\Models\Address;
 use App\Models\User;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -54,7 +54,7 @@ class Order extends Component
         $order = \App\Models\Order::findOrFail($orderId);
 
         if ($order) {
-            Delivery::updateOrCreate(
+            Address::updateOrCreate(
                 ['order_id' => $orderId],
                 [
                     'rider_id' => $riderId,
