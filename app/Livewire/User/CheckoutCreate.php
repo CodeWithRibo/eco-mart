@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -19,9 +20,9 @@ use Psr\Container\NotFoundExceptionInterface;
 class CheckoutCreate extends Component
 {
     use HasToast;
-
+    public $addressId;
     /*Orders*/
-    public $payment_method;
+//    public $payment_method;
 
     public $deliveryFee = 40; /*Default Fee*/
 
@@ -33,22 +34,28 @@ class CheckoutCreate extends Component
     }
 
 
-    protected function rules(): array
-    {
-        return [
-            'payment_method' => 'required',
-        ];
-    }
+//    protected function rules(): array
+//    {
+//        return [
+//            'payment_method' => 'nullable|required',
+//        ];
+//    }
 
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws \Throwable
      */
+
+    #[On('selected-address')]
+    public function loadCheckout($id): void
+    {
+        $this->addressId = $id;
+    }
+
     public function save()
     {
-        $this->validate();
-
+//        $this->validate();
         DB::beginTransaction();
 
         try {
@@ -86,10 +93,15 @@ class CheckoutCreate extends Component
             $order = Order::query()->create([
                 'total_amount' => $total + $this->deliveryFee,
                 'order_number' => $orderNumber,
-                'payment_method' => $this->payment_method,
+                'payment_method' => 'Gcash', //Temporary
                 'user_id' => auth()->id(),
             ]);
 
+            Address::query()
+                ->where('id', $this->addressId)
+                ->update([
+                'order_id' => $order->id,
+            ]);
 
             foreach ($cart as $item) {
 
