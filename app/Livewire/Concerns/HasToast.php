@@ -65,4 +65,31 @@ trait HasToast
         );
     }
 
+    public function info(string $content)
+    {
+        return $this->dispatch('notify',
+            type: 'info',
+            content: $content,
+            duration: 4000
+        );
+    }
+
+    public function success(string $content)
+    {
+        return $this->dispatch('notify',
+            type: 'success',
+            content: $content,
+            duration: 4000
+        );
+    }
+
+    public function error(string $content)
+    {
+        return $this->dispatch('notify',
+            type: 'error',
+            content: $content,
+            duration: 4000
+        );
+    }
+
 }
