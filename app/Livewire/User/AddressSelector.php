@@ -15,6 +15,16 @@ class AddressSelector extends Component
         $this->dispatch('selected-address', id: $this->selectedAddress);
     }
 
+    public function getEditId($id): void
+    {
+        $this->dispatch('edit-address', id : $id);
+    }
+
+    public function getDeleteId($id): void
+    {
+        $this->dispatch('delete-address', id: $id);
+    }
+
     public function render()
     {
         $addresses = Address::query()

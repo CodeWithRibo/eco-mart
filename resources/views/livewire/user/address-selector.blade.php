@@ -11,12 +11,20 @@
                         <span class="text-[13px] text-gray-500">  {{$address->region_name}}, {{$address->province_name}}</span>
                     </div>
                 </div>
-                <div>
+                <div class="flex items-center">
+                    <x-ui.modal.trigger id="edit-address" class="mr-2">
+                        <x-ui.button variant="outline" icon="ps:pencil" color="slate" size="sm" wire:click="getEditId({{$address->id}})">Edit</x-ui.button>
+                    </x-ui.modal.trigger>
 
-                    <x-ui.button variant="outline" icon="ps:pencil" color="slate" size="sm">Edit</x-ui.button>
-                    <x-ui.button variant="outline"  icon="ps:trash" color="red" size="sm">Delete</x-ui.button>
+                    <x-ui.modal.trigger id="delete-address" class="mr-2">
+                        <x-ui.button variant="outline"  icon="ps:trash" color="red" size="sm"
+                        wire:click="getDeleteId({{$address->id}})"
+                        >Delete</x-ui.button>
+                    </x-ui.modal.trigger>
                 </div>
             </div>
             @endforeach
+            @livewire('user.edit-address-selector')
+            @livewire('user.delete-address-selector')
         </div>
     </div>
