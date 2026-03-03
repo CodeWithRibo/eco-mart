@@ -57,6 +57,7 @@ class CreateAddressSelector extends Component
                'barangay'       => $this->barangay,
                'user_id'       => auth()->id()
            ]);
+           $this->success('Added Address Successfully');
        }
 
         return redirect()->route('shopping-carts.checkout');
