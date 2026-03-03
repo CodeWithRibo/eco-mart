@@ -22,7 +22,7 @@ class CheckoutCreate extends Component
     use HasToast;
     public $addressId;
     /*Orders*/
-//    public $payment_method;
+    public $payment_method;
 
     public $deliveryFee = 40; /*Default Fee*/
 
@@ -34,12 +34,12 @@ class CheckoutCreate extends Component
     }
 
 
-//    protected function rules(): array
-//    {
-//        return [
-//            'payment_method' => 'nullable|required',
-//        ];
-//    }
+    protected function rules(): array
+    {
+        return [
+            'payment_method' => 'required',
+        ];
+    }
 
     /**
      * @throws ContainerExceptionInterface
@@ -53,9 +53,18 @@ class CheckoutCreate extends Component
         $this->addressId = $id;
     }
 
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws \Throwable
+     * @throws ContainerExceptionInterface
+     */
     public function save()
     {
-//        $this->validate();
+        if (empty($this->addressId)) {
+            return $this->noSelectedAddress('Please Select Address before processed');
+        }
+        $this->validate();
+
         DB::beginTransaction();
 
         try {
@@ -93,7 +102,7 @@ class CheckoutCreate extends Component
             $order = Order::query()->create([
                 'total_amount' => $total + $this->deliveryFee,
                 'order_number' => $orderNumber,
-                'payment_method' => 'Gcash', //Temporary
+                'payment_method' => $this->payment_method,
                 'user_id' => auth()->id(),
             ]);
 
