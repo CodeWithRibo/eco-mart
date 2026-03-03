@@ -2,6 +2,21 @@
     <form wire:submit.prevent="save()" action="" method="POST">
       {{--Adddress Selector--}}
         @livewire('user.create-address-selector')
+        <div class="p-5">
+            <!-- Invalid state -->
+            <x-ui.field>
+                <x-ui.label>Payment Method</x-ui.label>
+                <x-ui.select
+                    placeholder="Select a payment method"
+                    icon="exclamation-circle"
+                    wire:model="payment_method">
+                    <x-ui.select.option value="Cash on Delivery">Cash On Delivery</x-ui.select.option>
+                    <x-ui.select.option value="Bank">Bank</x-ui.select.option>
+                    <x-ui.select.option value="Wallet">Wallet</x-ui.select.option>
+                </x-ui.select>
+                <x-ui.error name="payment_method"/>
+            </x-ui.field>
+        </div>
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
          {{--Version 1.0--}}
          {{--Add Address--}}
