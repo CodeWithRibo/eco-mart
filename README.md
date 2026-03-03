@@ -20,6 +20,8 @@ Eco Mart System Snapshot (Picture)
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4d45e322-04ab-4cfe-9104-001774447c0b" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6e413857-b1fd-4af1-87f9-81744aa54ead" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/63def774-e926-4e97-8aa5-ea4e7a916c2a" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/defa7457-1d39-41fb-8bd0-46c7d50356e7" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5b346560-a849-418a-aa62-395fe77ec545" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/91a1c72a-4e8c-451d-922e-952dd10f51c1" />
 
 **Admin Overview**
